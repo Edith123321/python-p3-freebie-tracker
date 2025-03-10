@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey, Column, Integer, String, MetaData
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship, backref, session
 from sqlalchemy.ext.declarative import declarative_base
 
 # Define naming conventions for foreign keys
@@ -21,7 +21,8 @@ class Company(Base):
     # One company has many freebies
     freebies = relationship('Freebie', back_populates='company')
 
-    # One company has many devs through freebies
+    # One company can give many freebies
+
     devs = relationship('Dev', secondary='freebies', back_populates='companies')
 
     def __repr__(self):
